@@ -1,0 +1,1 @@
+Game created as part of the Pragmatic Studio's Ruy course.
