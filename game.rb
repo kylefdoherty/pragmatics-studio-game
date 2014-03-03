@@ -1,4 +1,6 @@
 require_relative 'player'
+require_relative 'die'
+
 #game class that takes a title and stores players in an array 
 class Game
 	def initialize(name)
@@ -10,17 +12,30 @@ class Game
 		@players << player
 	end 
 
+	def player_status
+		@players.each do |p|
+			puts "#{p.name}'s health is #{p.health}"
+		end
+	end 
+
 	def play
 		@players.each do |p|
 			puts p
 		end 
 		@players.each do |p|
-			p.kick
-			p.punch 
-			p.kick
-			p.pizza
-			puts p
+			die = Die.new
+			roll = die.roll
+
+			case roll
+			when 1..2
+				p.kick
+			when 3..4
+				p.punch
+			else 
+				p.pizza
+			end 
 		end 
+		player_status
 	end 
 
 end

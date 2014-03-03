@@ -32,11 +32,13 @@ class Player
 		current_health = "#{name}'s health"
 		"#{current_health.ljust(30,'.')}#{@health}"
 	end
+
+	def strong?
+		if @health <= 100
+			false
+		else 
+			true
+		end 
+	end
 end 
 
-if $0 == __FILE__
-player = Player.new('mikey', 100)
-puts player
-
-
-end

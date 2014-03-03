@@ -58,6 +58,28 @@ describe Player do
 
 	end 
 
+	context "when health is greater than 100" do 
+
+		before do 
+			@player = Player.new('Kyle', 150)
+		end 
+
+		it "is Strong" do 
+			@player.should be_strong
+		end
+	end 
+
+	context "when health is less than or equal to 100" do 
+
+		before do 
+			@player = Player.new('Bob', 99)
+		end 
+
+		it "is Weak" do 
+			@player.should_not be_strong
+		end
+	end 
+
 
 
 end 
