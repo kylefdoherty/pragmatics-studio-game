@@ -1,6 +1,6 @@
 require_relative 'player'
 require_relative 'die'
-
+require_relative 'game_turn'
 #game class that takes a title and stores players in an array 
 class Game
 	def initialize(name)
@@ -13,27 +13,21 @@ class Game
 	end 
 
 	def player_status
-		@players.each do |p|
-			puts "#{p.name}'s health is #{p.health}"
+		@players.each do |player|
+			puts "#{player.name}'s health is #{player.health}"
 		end
 	end 
 
 	def play
-		@players.each do |p|
-			puts p
-		end 
-		@players.each do |p|
-			die = Die.new
-			roll = die.roll
+		puts "There are #{@players.size} players in #{@title}: "
 
-			case roll
-			when 1..2
-				p.kick
-			when 3..4
-				p.punch
-			else 
-				p.pizza
-			end 
+		@players.each do |player|
+			puts player
+		end 
+		
+		@players.each do |player|
+		GameTurn.take_turn(player)
+		puts player
 		end 
 		player_status
 	end 
