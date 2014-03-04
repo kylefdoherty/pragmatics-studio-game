@@ -13,5 +13,6 @@ turtles.add_player(playerA)
 turtles.add_player(playerB)
 turtles.add_player(playerC)
 turtles.add_player(playerD)
-turtles.play 
+turtles.play(3) #tell it to play 3 rounds
+turtles.print_stats 
 end 

@@ -40,5 +40,9 @@ class Player
 			true
 		end 
 	end
+
+	def <=>(player)
+		player.score <=> score #compares the players and now orders them in descending order 
+	end 
 end 
 

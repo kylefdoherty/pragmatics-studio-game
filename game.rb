@@ -18,18 +18,42 @@ class Game
 		end
 	end 
 
-	def play
+	def play(rounds)
 		puts "There are #{@players.size} players in #{@title}: "
 
 		@players.each do |player|
 			puts player
 		end 
 		
-		@players.each do |player|
-		GameTurn.take_turn(player)
-		puts player
+		rounds.times do
+			@players.each do |player|
+			GameTurn.take_turn(player)
+			puts player
+			end 
+			player_status
 		end 
-		player_status
+		
+	end 
+
+	def print_name_health(p)
+		"#{p.name}'s Health".ljust(30,'.') + "#{p.health}" #moving this formatting into a method so it can be reused in other places and so if I want to change it I only have to do so in one place
+	end
+
+	def print_stats
+		strong_players, weak_players = @players.partition {|p| p.strong?}
+		
+
+		puts "\n#{@name} Stats:"
+		puts "\nStrong Players:"
+		strong_players.sort.each {|p| puts print_name_health(p)} unless strong_players.empty?
+		puts "\nWeak Players:"
+		weak_players.sort.each {|p| puts print_name_health(p)} unless weak_players.empty?
+
+
+		puts "\n#{@name} High Scores:"
+		@players.sort.each {|p| puts "#{p.name.ljust(30,'.')}#{p.score}"}
+		# sorted_players = @players.sort {|a,b| b.score <=> a.score} #sorted players by their score in descending order 
+		# sorted_players.each {|p| puts "#{p.name.ljust(30,'.')}#{p.score}"}
 	end 
 
 end

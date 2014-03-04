@@ -17,25 +17,25 @@ describe Game do
 
   	Die.any_instance.stub(:roll).and_return(1)
 
-  	@game.play 
+  	@game.play(2) #going to send the number of rounds we want the game to play. 
 
-  	@player.health.should == @initial_health - 10
+  	@player.health.should == @initial_health - (10*2) #becuase we're playing 2 rounds, the player gets kicked twice and thus health decreases by 20
 
   end
 
   it "punches the player if a medium number is called" do 
   	Die.any_instance.stub(:roll).and_return(3)
 
-  	@game.play 
+  	@game.play(2) 
 
-	@player.health.should == @initial_health - 5
+	@player.health.should == @initial_health - (5*2)
   end  	
 
   it "Pizza Time a player if a high number is called" do 
   	Die.any_instance.stub(:roll).and_return(5)
 
-  	@game.play 
+  	@game.play(2)
 
-	@player.health.should == @initial_health + 15
+	@player.health.should == @initial_health + (15*2)
   end  	
 end
