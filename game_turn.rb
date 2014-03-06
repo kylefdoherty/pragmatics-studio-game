@@ -1,5 +1,6 @@
 require_relative 'die'
 require_relative 'player'
+require_relative 'treasure_trove'
 
 module GameTurn
 
@@ -14,6 +15,9 @@ module GameTurn
 				player.punch
 			else 
 				player.pizza
-			end 
+			end
+		treasure = TreasureTrove.random 
+		player.found_treasure(treasure)
+
 	end
 end
