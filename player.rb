@@ -10,6 +10,11 @@ class Player
 		@found_treasures = Hash.new(0) #you have to create a hash with a default value of 0 otherwise the found treasure method will throw an error becuase it's trying to run the + method on nil
 	end 
 
+	def self.from_csv(line)
+		name, health = line.split(",")
+		player = Player.new(name, Integer(health))
+	end 
+
 	def kick
 		@health -= 10
 		puts "#{name} was kicked in the face...ouch!...#{@name}'s health decreased by 10"

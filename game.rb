@@ -13,6 +13,13 @@ class Game
 		@players << player
 	end 
 
+	def load_players(file)
+		File.readlines(file).each do |line|
+			add_player(Player.from_csv(line))
+		end 
+	end 
+
+
 	def player_status
 		@players.each do |player|
 			puts "#{player.name}'s health is #{player.health}"
@@ -57,6 +64,10 @@ class Game
 		@players.inject(0) {|sum, player| sum + player.points}
 	end 
 
+	def high_scores(player)
+		"#{player.name.ljust(30,'.')}#{player.score}"
+	end 
+
 	def print_stats
 		strong_players, weak_players = @players.partition {|p| p.strong?}
 		
@@ -82,10 +93,19 @@ class Game
 
 
 		puts "\n#{@name} High Scores:"
-		@players.sort.each {|p| puts "#{p.name.ljust(30,'.')}#{p.score}"}
+		@players.sort.each {|p| puts high_scores(p)} #defined own .sort method in player class that sorts by players score in descending order
 		# sorted_players = @players.sort {|a,b| b.score <=> a.score} #sorted players by their score in descending order 
 		# sorted_players.each {|p| puts "#{p.name.ljust(30,'.')}#{p.score}"}
 
+	end 
+
+	def save_high_scores(file="high_scores.txt")
+		File.open(file, 'w') do |file| 
+			file.puts "#{@name} High Scores:"
+			@players.sort.each do |player| #defined own .sort method in player class that sorts by players score in descending order
+				file.puts high_scores(player)
+			end 
+		end
 	end 
 
 end
