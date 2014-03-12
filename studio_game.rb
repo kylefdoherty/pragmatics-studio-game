@@ -1,4 +1,6 @@
 require_relative 'player'
+require_relative 'clumsy_player'
+require_relative 'berserk_player'
 require_relative 'game'
 
 if $0 == __FILE__
@@ -10,6 +12,10 @@ playerD = Player.new("raph")
 
 turtles = Game.new("Turtles")
 turtles.load_players(ARGV.shift || "players.csv") #if there is something in ARGV array use that else use players.csv which is the default
+klutz = ClumsyPlayer.new("klutz", 105)
+turtles.add_player(klutz)
+berserker = BerserkPlayer.new("berserker", 50)
+turtles.add_player(berserker)
 
 
 # turtles.add_player(playerA)
@@ -23,7 +29,7 @@ answer = gets.chomp.downcase
 	case answer 
 	when /^\d+$/
 		turtles.play(answer.to_i) do #tell it to play n number of rounds
-			turtles.total_points >= 2000
+			turtles.total_points >= 1000000
 		end 
 	when "exit", "quit"
 		turtles.print_stats 
