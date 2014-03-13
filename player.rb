@@ -1,8 +1,9 @@
 require_relative 'treasure_trove'
+require_relative 'playable'
 #player class - has name & health.  has kick & punch methods that decrease health by 10 & 5 respectively. has a pizza method that restores 15 health
 class Player
-	attr_accessor :name
-	attr_reader :health
+	include Playable
+	attr_accessor :name, :health
 
 	def initialize(name, health=100)
 		@name = name.capitalize
@@ -14,21 +15,6 @@ class Player
 		name, health = line.split(",")
 		player = Player.new(name, Integer(health))
 	end 
-
-	def kick
-		@health -= 10
-		puts "#{name} was kicked in the face...ouch!...#{@name}'s health decreased by 10"
-	end 
-
-	def punch 
-		@health -= 5
-		puts "#{name} was punched in the gut...oooh!...#{@name}'s health decreased by 5"
-	end 
-
-	def pizza
-		@health += 15
-		puts "PIZZA TIME!!!....+15 health for #{name}"
-	end
 
 
 	def found_treasure(treasure)#passes in the specifc treasure object such as a :hammer
@@ -55,14 +41,6 @@ class Player
 
 	def to_s
 		"#{@name}'s health is #{@health} and score is #{score}"
-	end
-
-	def strong?
-		if @health <= 100
-			false
-		else 
-			true
-		end 
 	end
 
 	def <=>(player)

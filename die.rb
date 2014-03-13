@@ -1,11 +1,12 @@
-class Die
-	attr_reader :number
+require_relative 'auditable'
 
-	def initialize
-		roll
-	end 
+class Die
+	include Auditable 
+	attr_reader :number 
 	
 	def roll
 		@number = rand(1..6)
+		audit 
+		@number #returning number from the methodº
 	end 
 end
